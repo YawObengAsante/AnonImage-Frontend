@@ -5,7 +5,7 @@ import MobileNav from "./mobile-nav";
 const NAVLINKS = [
   {
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
   },
   {
     name: "About",
@@ -21,7 +21,11 @@ export default function NavBar() {
   return (
     <div className="w-full px-5 h-[60px] flex justify-between items-center">
       <div className="flex items-center justify-between w-xl gap-x-7">
-        <h1 className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text cursor-pointer">AnonImage</h1>
+        <Link to="/">
+          <h1 className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text cursor-pointer">
+            AnonImage
+          </h1>
+        </Link>
         <div className="hidden md:block">
           <ul className="flex gap-7 font-bold">
             {NAVLINKS.map((link) => (

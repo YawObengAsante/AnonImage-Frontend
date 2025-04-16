@@ -10,7 +10,7 @@ import {
 const NAVLINKS = [
   {
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
   },
   {
     name: "About",
