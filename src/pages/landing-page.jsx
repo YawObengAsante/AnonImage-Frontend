@@ -12,7 +12,7 @@ export default function LandingPage() {
           <Heading>
             <span>Anonymous Images,</span>
             <br />
-            <span className="relative bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
+            <span className="relative gradient-text">
               Delivered to Your Gallery
             </span>
           </Heading>

@@ -5,7 +5,7 @@ export default function AboutPage() {
       <div className="max-w-4xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text lg:text-6xl">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text lg:text-6xl">
             About Us (Or Not Really)
           </h1>
           <p className="mt-3 sm:mt-5 max-w-xl mx-auto text-lg sm:text-xl text-gray-700">
