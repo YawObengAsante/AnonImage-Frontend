@@ -1,6 +1,9 @@
+import MaxWidthWrapper from "../components/max-width-wrapper";
 
 export default function LandingPage() {
   return (
-    <div className="text-red-500 font-extrabold">Landing page</div>
+    <section className="w-full h-screen">
+      <MaxWidthWrapper></MaxWidthWrapper>
+    </section>
   )
 }
