@@ -9,7 +9,7 @@ export default function LandingPage() {
   return (
     <section className="w-full h-screen bg-white/95">
       <MaxWidthWrapper className="flex gap-x-6">
-        <div className="flex flex-col gap-y-5 justify-center">
+        <div className="flex flex-col gap-y-5 md:justify-center">
           <Heading>
             <span>Anonymous Images,</span>
             <br />
@@ -31,6 +31,7 @@ export default function LandingPage() {
             </Button>
           </Link>
         </div>
+        {/* illustration image */}
         <div className="hidden md:block h-full">
           <img
             className="h-full"
