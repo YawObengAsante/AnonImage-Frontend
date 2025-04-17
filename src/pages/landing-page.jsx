@@ -1,8 +1,9 @@
 import Heading from "../components/heading";
 import MaxWidthWrapper from "../components/max-width-wrapper";
-import {Button} from "@/components/ui/Button"
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/Button";
 import { CgArrowRight } from "react-icons/cg";
-import illustrationImg from "@/assets/undraw_photographer_2rbr.svg"
+import illustrationImg from "@/assets/undraw_photographer_2rbr.svg";
 
 export default function LandingPage() {
   return (
@@ -20,13 +21,24 @@ export default function LandingPage() {
             Share Images. No names.{" "}
             <span className="font-semibold text-gray-700">No limits</span>
           </p>
-          <p className="text-base text-gray-600 max-w-prose text-pretty">Upload and share images anonymously. No login. No tracking. Just pure freedom</p>
-          <Button className="w-[150px] cursor-pointer bg-blue-500 text-white hover:bg-blue-600 transition-all ease-in-out duration-300">Get Started <CgArrowRight/></Button>
+          <p className="text-base text-gray-600 max-w-prose text-pretty">
+            Upload and share images anonymously. No login. No tracking. Just
+            pure freedom
+          </p>
+          <Link to="/dashboard">
+            <Button className="w-[150px] cursor-pointer bg-blue-500 text-white hover:bg-blue-600 transition-all ease-in-out duration-300">
+              Get Started <CgArrowRight />
+            </Button>
+          </Link>
         </div>
         <div className="hidden md:block h-full">
-          <img className="h-full" src={illustrationImg} alt="illustration image" />
+          <img
+            className="h-full"
+            src={illustrationImg}
+            alt="illustration image"
+          />
         </div>
       </MaxWidthWrapper>
-    </section> 
+    </section>
   );
 }

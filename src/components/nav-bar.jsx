@@ -38,9 +38,11 @@ export default function NavBar() {
             Log In
           </Button>
         </Link>
+        <Link to="/dashboard">
         <Button className="bg-blue-500 text-white font-bold rounded-full cursor-pointer hover:bg-blue-600 transition-all ease-in-out duration-500">
           Get Started
         </Button>
+        </Link>
       </div>
 
       <div className="md:hidden">
