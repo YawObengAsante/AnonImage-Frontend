@@ -31,7 +31,7 @@ export default function NavBar() {
         <Button className="cursor-pointer hover:bg-black hover:text-white transition-all ease-in-out duration-500">
           Log In
         </Button>
-        <Button className="bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-400 transition-all ease-in-out duration-500">
+        <Button className="bg-blue-500 text-white font-bold rounded-full cursor-pointer hover:bg-blue-600 transition-all ease-in-out duration-500">
           Get Started
         </Button>
       </div>
