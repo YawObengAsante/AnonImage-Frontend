@@ -1,7 +1,7 @@
 import Heading from "../components/heading";
 import MaxWidthWrapper from "../components/max-width-wrapper";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { CgArrowRight } from "react-icons/cg";
 import illustrationImg from "@/assets/undraw_photographer_2rbr.svg";
 
