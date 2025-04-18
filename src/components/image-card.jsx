@@ -1,3 +1,7 @@
+import { timeAgo } from "../pages/utils"
+
+
+
 import {
     Card,
     CardContent,
@@ -5,14 +9,15 @@ import {
   } from "@/components/ui/card"
   import {Button} from "@/components/ui/button"
   
-export default function ImageCard() {
+export default function ImageCard(props) {
   return (
     <Card className="flex basis-[200px]">
         <CardContent>
-            <img src="https://dummyimage.com/200x200/000/fff" alt="image" />
+            <img src={props.image} alt="vim" />
+            <p>{timeAgo(props.time)}</p>
         </CardContent>
         <CardFooter>
-            <Button variant="destructive">Delete</Button>
+            <Button onClick={props.delete} variant="destructive">Delete</Button>
         </CardFooter>
     </Card>
   )

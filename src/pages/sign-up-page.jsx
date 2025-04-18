@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import axiosInstance from "../axiosInstance";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     email: "",
     username: "",
     password: "",
+    first_name: "",
   });
+  const navigate = useNavigate()
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +23,14 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle sign up logic here
-    console.log("Form submitted:", formData);
+    axiosInstance.post(`api/user/register/`,formData)
+    .then((res) =>{
+        
+        console.log(res);
+        navigate('/log-in');
+    })
+    //
+    //console.log("Form submitted:", formData);
   };
 
   return (
@@ -70,6 +81,26 @@ const SignUp = () => {
                 required
                 className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blue-300 rounded-md p-2 border"
                 value={formData.username}
+                onChange={handleChange}
+              />
+            </div>
+
+            
+            <div className="mb-4">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-blue-700"
+              >
+                Name
+              </label>
+              <input
+                id="first_name"
+                name="first_name"
+                type="text"
+                autoComplete="first_name"
+                required
+                className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blue-300 rounded-md p-2 border"
+                value={formData.first_name}
                 onChange={handleChange}
               />
             </div>

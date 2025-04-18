@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import axiosInstance from "../axiosInstance";
 
-const Login = () => {
+const Login = (props) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate()
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +21,20 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login logic here
-    console.log("Login attempt with:", formData);
+    
+         axiosInstance.post(`api/token/`,formData)
+         .then((res) =>{
+             localStorage.setItem('access_token',res.data.access);
+             localStorage.setItem('refresh_token',res.data.refresh);
+             axiosInstance.defaults.headers['Authorization'] =
+             'JWT ' + localStorage.getItem('access_token');
+             console.log(res);
+             //props.user(formData.email)
+             //props.token(res.data.access)
+             navigate('/');
+         })
+         //
+    //console.log("Login attempt with:", formData);
   };
 
   return (

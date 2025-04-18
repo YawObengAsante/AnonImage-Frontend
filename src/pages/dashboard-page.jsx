@@ -7,7 +7,8 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 
 export default function DashboardPage() {
-  const [link, setLink] = useState("https://random-link-goes-here");
+  const [link, setLink] = useState("http://localhost:5173/send-image/1/");
+ // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
 
   const handleCopyToClipboard = async () => {
     const success = await copyLink(link);
