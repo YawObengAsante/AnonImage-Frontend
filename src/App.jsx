@@ -16,6 +16,7 @@ import DashboardPage from "./pages/dashboard-page";
 import SignUp from "./pages/sign-up-page";
 import Login from "./pages/log-in-page";
 import SendImage from "./pages/sendmess";
+
 // create router for routing pages on frontend
 const router = createBrowserRouter(
   createRoutesFromElements(

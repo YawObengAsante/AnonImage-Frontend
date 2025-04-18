@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ImageCard from "../components/image-card";
 import axiosInstance from "../axiosInstance";
-import { timeAgo } from "./utils";
+import { timeAgo } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { TailSpin } from 'react-loader-spinner';
 

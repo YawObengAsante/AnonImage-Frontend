@@ -1,4 +1,4 @@
-import { timeAgo } from "../pages/utils"
+import { timeAgo } from "@/lib/utils";
 
 
 
