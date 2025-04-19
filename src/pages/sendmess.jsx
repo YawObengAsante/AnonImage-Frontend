@@ -18,7 +18,8 @@ const SendImage = () => {
   // const [, setUploadProgressArray] = useState([]);
   // const [totalUploadProgress, setTotalUploadProgress] = useState(null);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     // handle single file upload
     if(!file) return
 
