@@ -11,6 +11,8 @@ import { Toaster } from "@/components/ui/sonner";
 // const { userid } = useParams();
 
 const SendImage = () => {
+  // contains the user id 
+  const { userid } = useParams();
   // set state to handle multiple file uploads
   const [files, setFiles] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("idle");
