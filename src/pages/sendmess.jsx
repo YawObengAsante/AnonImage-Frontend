@@ -18,6 +18,7 @@ const SendImage = () => {
   const [totalUploadProgress, setTotalUploadProgress] = useState(null);
 
   const handleSubmit = async () => {
+    e.preventDefault()
     // return out of function early if no file is selected
     if (!files || files.length === 0) return;
 
