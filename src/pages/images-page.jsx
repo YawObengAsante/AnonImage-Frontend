@@ -3,7 +3,6 @@ import ImageCard from "../components/image-card";
 import axiosInstance from "../axiosInstance";
 import { timeAgo } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
-import { TailSpin } from 'react-loader-spinner';
 
 
 
