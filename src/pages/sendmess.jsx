@@ -13,6 +13,10 @@ import { Toaster } from "@/components/ui/sonner";
 const SendImage = () => {
   // contains the user id 
   const { userid } = useParams();
+
+  // we will navigate to the landing page right after the image has been sent
+ const navigate = useNavigate();
+
   // set state to handle multiple file uploads
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -43,6 +47,7 @@ const SendImage = () => {
       })
       setUploadStatus("success")
       setUploadProgress(100)
+      navigate('/')
     } catch (error) {
       setUploadStatus("error");
       setUploadProgress(0);
