@@ -14,76 +14,89 @@ const SendImage = () => {
   // contains the user id 
   const { userid } = useParams();
   // set state to handle multiple file uploads
-  const [files, setFiles] = useState(null);
+  const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("idle");
-  const [, setUploadProgressArray] = useState("idle");
-  const [totalUploadProgress, setTotalUploadProgress] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  // const [, setUploadProgressArray] = useState([]);
+  // const [totalUploadProgress, setTotalUploadProgress] = useState(null);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // return out of function early if no file is selected
-    if (!files || files.length === 0) return;
+    // handle single file upload
+    if(!file) return
 
-    setUploadStatus("uploading");
-    setUploadProgressArray(new Array(files.length).fill(0));
+    setUploadStatus("uploading")
+    setUploadProgress(0)
 
-    const promises = files.map((file, index) => {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      return axiosInstance.post(`api/imaging/${userid}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          const progress = progressEvent.total
-            ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            : 0;
-          return setUploadProgressArray((prevProgress) => {
-            const newProgress = [...prevProgress];
-            newProgress[index] = progress;
-            const totalProgress =
-              newProgress.reduce((acc, curr) => acc + curr, 0) /
-              newProgress.length;
-            setTotalUploadProgress(totalProgress);
-            return newProgress;
-          });
-        },
-      });
-    });
+    const formdata = new FormData()
+    formdata.append("file", file)
 
     try {
-      await Promise.all(promises);
-      setUploadStatus("success");
-      toast("Files uploaded successfully!")
+      await axiosInstance.post(`api/imaging/${userid}`, formdata, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        onUploadProgress: (progressEvent) => {
+         const progress = progressEvent.total ? Math.round((progressEvent.loaded * 100) / uploadProgress.total) : 0
+         setUploadProgress(progress)
+        }
+      })
+      setUploadStatus("success")
+      setUploadProgress(100)
     } catch (error) {
       setUploadStatus("error");
-      toast("Files failed upload. Try again!")
+      setUploadProgress(0);
       console.error(error);
     }
 
-    // let data = new FormData();
-    // data.append("image", pic.image[0]);
-    // axiosInstance
-    //   .post(`api/imaging/${userid}`, data, {
+
+    // below is the code to handle multiple file uploads
+    // return out of function early if no file is selected
+    // if (!files || files.length === 0) return;
+
+    // setUploadStatus("uploading");
+    // setUploadProgressArray(new Array(files.length).fill(0));
+
+    // const promises = files.map((file, index) => {
+    //   const formData = new FormData();
+    //   formData.append("file", file);
+
+    //   return axiosInstance.post(`api/imaging/${userid}`, formData, {
     //     headers: {
     //       "Content-Type": "multipart/form-data",
     //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     navigate("/");
-    //   })
-    //   .catch((e) => {
-    //     console.log("login", e);
-    //     navigate("/login");
+    //     onUploadProgress: (progressEvent) => {
+    //       const progress = progressEvent.total
+    //         ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
+    //         : 0;
+    //       return setUploadProgressArray((prevProgress) => {
+    //         const newProgress = [...prevProgress];
+    //         newProgress[index] = progress;
+    //         const totalProgress =
+    //           newProgress.reduce((acc, curr) => acc + curr, 0) /
+    //           newProgress.length;
+    //         setTotalUploadProgress(totalProgress);
+    //         return newProgress;
+    //       });
+    //     },
     //   });
+    // });
+
+    // try {
+    //   await Promise.all(promises);
+    //   setUploadStatus("success");
+    //   toast("Files uploaded successfully!")
+    // } catch (error) {
+    //   setUploadStatus("error");
+    //   toast("Files failed upload. Try again!")
+    //   console.error(error);
+    // }
+
   };
   const handleChangeEvent = (e) => {
-    // setPic({ image: e.target.files });
     if (e.target.files) {
-      const filesArray = Array.from(e.target.files);
-      setFiles(filesArray);
+      // const filesArray = Array.from(e.target.files);
+      setFile(e.target.file[0]);
     }
   };
 
