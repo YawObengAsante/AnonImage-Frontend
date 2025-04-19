@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 /// so we will check local storage for access token it it exist it means the user has logged in
 
 export default function DashboardPage() {
-  const [link, setLink] = useState("http://localhost:5173/send-image/1/");
+  const [link, setLink] = useState(`https://anonimage-frontend.onrender.com/send-image/${parseInt(ids)}/`);
   // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
 
   const [ids, setId] = useState("no");
