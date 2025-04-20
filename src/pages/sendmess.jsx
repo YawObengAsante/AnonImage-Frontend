@@ -33,7 +33,7 @@ const SendImage = () => {
     setUploadProgress(0)
 
     const formdata = new FormData()
-    formdata.append("file", file)
+    formdata.append("image", file)
 
     try {
       await axiosInstance.post(`api/imaging/${userid}`, formdata, {
@@ -131,7 +131,7 @@ const SendImage = () => {
                   accept="image/*"
                   name="image"
                   required
-                  multiple
+                  
                   onChange={handleChangeEvent}
                   className="block w-full text-sm text-blue-700 border border-blue-300 rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent
       file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
