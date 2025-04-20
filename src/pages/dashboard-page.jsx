@@ -19,6 +19,8 @@ export default function DashboardPage() {
   // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
 
   const [ids, setId] = useState("no");
+  const [username, setUsername] = useState("no");
+
   const [loading, setLoading] = useState(true);
   
   let locals = localStorage.getItem("access_token");
@@ -30,7 +32,9 @@ export default function DashboardPage() {
         },
       })
       .then((res) => {
+        console.log(res.data)
         setId(res.data.id);
+        setUsername(res.data.name);
         setLoading(false);
 
 
@@ -43,7 +47,7 @@ export default function DashboardPage() {
 
   const handleCopyToClipboard = async () => {
 
-    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${ids}/`);
+    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${ids}/${username}`);
 
     // Show toast after we know the copy status
     success
@@ -80,7 +84,7 @@ export default function DashboardPage() {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 bg-white rounded-md px-4 sm:px-6 w-full max-w-2xl mx-auto">
                 <p className="text-gray-700 text-sm sm:text-base truncate w-full text-center sm:text-left">
-                  {`https://anonimage-frontend.onrender.com/send-image/${ids}/`}
+                  {`https://anonimage-frontend.onrender.com/send-image/${ids}/${username}`}
                 </p>
                 <div
                   onClick={handleCopyToClipboard}

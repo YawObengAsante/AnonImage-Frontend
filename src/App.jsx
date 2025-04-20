@@ -26,7 +26,7 @@ const router = createBrowserRouter(
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/image" element={<ImagesPage />} />
-        <Route path="/send-image/:userid/" element={<SendImage />} />
+        <Route path="/send-image/:userid/:username/" element={<SendImage />} />
 
       </Route>
       <Route path="/sign-up" element={<SignUp/>} />
