@@ -5,57 +5,64 @@ import { timeAgo } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
 
+
 export default function ImagesPage() {
-  const [post, setPost] = useState([]);
+
+  const [post, setPost] = useState([])
   const [loading, setLoading] = useState(true);
 
+  
   const deleteImage = (id) => {
     setPost((prevPost) => prevPost.filter((pos) => pos.id !== id));
     delPost(id);
-  };
+};
 
-  const getPost = () => {
-    axiosInstance
-      .get(`api/imaging/view-image/`, {
-        headers: {
-          Authorization: "JWT " + localStorage.getItem("access_token"),
-        },
-      })
-      .then((res) => {
-        console.log("successful");
-        console.log(res.data);
-        setPost(res.data);
+const getPost = ()=>{
+    axiosInstance.get(`api/imaging/view-image/`,{
+        headers:{
+    Authorization: 'JWT ' + localStorage.getItem('access_token')
+
+},
+    }
+    )
+    .then((res) =>{
+        console.log("successful")
+        console.log(res.data)
+        setPost(res.data)
         setLoading(false);
-      })
-      .catch((e) => {
-        console.log("login", e);
+    })
+    .catch(e=>{
+        console.log('login',e)
         //navigate('/login')
-      });
-  };
+    })
 
-  const delPost = (id) => {
-    axiosInstance
-      .get(`api/imaging/delete-image/${id}`, {
-        headers: {
-          Authorization: "JWT " + localStorage.getItem("access_token"),
-        },
-      })
-      .then((res) => {
-        console.log("deleted successfully");
-      })
-      .catch((e) => {
-        console.log("login", e);
+}
+
+const delPost = (id)=>{
+    axiosInstance.get(`api/imaging/delete-image/${id}`,{
+        headers:{
+    Authorization: 'JWT ' + localStorage.getItem('access_token')
+
+},
+    }
+    )
+    .then((res) =>{
+        console.log("deleted successfully")
+        
+    })
+    .catch(e=>{
+        console.log('login',e)
         //navigate('/login')
-      });
-  };
+    })
+}
 
-  useEffect(() => {
+useEffect(()=>{
     getPost();
-  }, []);
+}, [])
+
 
   return (
     <div className="p-10 flex gap-3 flex-wrap">
-<<<<<<< HEAD
       {post.map((pos)=>{
                     return (
                     
@@ -67,18 +74,6 @@ export default function ImagesPage() {
 
       <l-linespinner/>
       
-=======
-      {post.map((pos) => {
-        return (
-          <ImageCard
-            key={pos.id}
-            image={pos.image}
-            time={pos.timestamp}
-            delete={() => deleteImage(pos.id)}
-          />
-        );
-      })}
->>>>>>> bdf5f776c47fff1d635ace03c3b8dec7e078acb9
     </div>
-  );
+  )
 }
