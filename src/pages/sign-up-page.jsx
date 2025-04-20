@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 
@@ -32,7 +32,9 @@ const SignUp = () => {
     //
     //console.log("Form submitted:", formData);
   };
-
+  useEffect(() => {
+      document.title = "sign up - Anonymous Image";
+    }, []);
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
