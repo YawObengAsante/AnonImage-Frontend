@@ -101,7 +101,9 @@ const SendImage = () => {
       setFile(e.target.files[0]);
     }
   };
-
+useEffect(() => {
+    document.title = "Send Image - Anonymous Image";
+  }, []);
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>

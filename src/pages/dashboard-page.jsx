@@ -1,6 +1,6 @@
 import Heading from "@/components/heading";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect,useEffect } from "react";
 import { copyLink } from "@/lib/utils";
 import CopyLinkButton from "@/components/copy-link-button";
 import { toast } from "sonner";
@@ -56,6 +56,10 @@ export default function DashboardPage() {
       getId();
     }
   }, []);
+
+  useEffect(() => {
+      document.title = "Dashboard - Anonymous Image";
+    }, []);
     if (loading) {
       return <ImagesPageLoader />;
     }

@@ -65,7 +65,9 @@ useEffect(()=>{
     getPost();
 }, [])
 
-
+useEffect(() => {
+    document.title = "Images - Anonymous Image";
+  }, []);
   if (loading) {
     return <ImagesPageLoader />;
   }
