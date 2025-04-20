@@ -7,53 +7,51 @@ import { BsFileEarmarkCheck } from "react-icons/bs";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 
-// const navigate = useNavigate();
-// const { userid } = useParams();
-
 const SendImage = () => {
-  // contains the user id 
+  // contains the user id
   const { userid } = useParams();
 
   // we will navigate to the landing page right after the image has been sent
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // set state to handle multiple file uploads
+  // set state to handle single file uploads
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [uploadProgress, setUploadProgress] = useState(0);
   // const [, setUploadProgressArray] = useState([]);
-   const [totalUploadProgress, setTotalUploadProgress] = useState(null);
+  const [totalUploadProgress, setTotalUploadProgress] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // handle single file upload
-    if(!file) return
+    if (!file) return;
 
-    setUploadStatus("uploading")
-    setUploadProgress(0)
+    setUploadStatus("uploading");
+    setUploadProgress(0);
 
-    const formdata = new FormData()
-    formdata.append("image", file)
+    const formdata = new FormData();
+    formdata.append("image", file);
 
     try {
       await axiosInstance.post(`api/imaging/${userid}`, formdata, {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data",
         },
         onUploadProgress: (progressEvent) => {
-         const progress = progressEvent.total ? Math.round((progressEvent.loaded * 100) / progressEvent.total) : 0
-         setUploadProgress(progress)
-        }
-      })
-      setUploadStatus("success")
-      setUploadProgress(100)
-      navigate('/')
+          const progress = progressEvent.total
+            ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            : 0;
+          setUploadProgress(progress);
+        },
+      });
+      setUploadStatus("success");
+      setUploadProgress(100);
+      navigate("/");
     } catch (error) {
       setUploadStatus("error");
       setUploadProgress(0);
       console.error(error);
     }
-
 
     // below is the code to handle multiple file uploads
     // return out of function early if no file is selected
@@ -96,7 +94,6 @@ const SendImage = () => {
     //   toast("Files failed upload. Try again!")
     //   console.error(error);
     // }
-
   };
   const handleChangeEvent = (e) => {
     if (e.target.files) {
@@ -131,7 +128,6 @@ const SendImage = () => {
                   accept="image/*"
                   name="image"
                   required
-                  
                   onChange={handleChangeEvent}
                   className="block w-full text-sm text-blue-700 border border-blue-300 rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent
       file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
@@ -145,36 +141,35 @@ const SendImage = () => {
                 Post
               </button>
             </form>
-          </div>   
-          
+          </div>
+
           <div className="flex flex-col items-start">
-          {file && (
-              <div className="bg-white mt-5 p-4 rounded-lg text-gray-700 max-w-[400px]">
-                <div className="flex justify-center gap-4">
-                  <BsFileEarmarkCheck size={25} />
-                  <span className="font-semibold">{file.name}</span>
+            {file && (
+              <div>
+                <div className="bg-white mt-5 p-4 rounded-lg text-gray-700 max-w-[400px]">
+                  <div className="flex justify-center gap-4">
+                    <BsFileEarmarkCheck size={25} />
+                    <span className="font-semibold">{file.name}</span>
+                  </div>
                 </div>
+
+                {/* upload progress bar */}
+                {uploadStatus === "uploading" && (
+                  <div className="space-y-2">
+                    <div className="w-full h-2.5 bg-gray-200 rounded-full">
+                      <div
+                        className="h-full w-full bg-blue-600 transition-all duration-300 rounded-full mt-2"
+                        style={{ width: `${uploadProgress}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      {uploadProgress}% uploaded
+                    </p>
+                  </div>
+                )}
               </div>
             )}
-
-
-        {uploadStatus === "uploading" && (
-          <div className="space-y-2">
-            <div className="w-full h-2.5 bg-gray-200 rounded-full">
-              <div
-                className="h-full w-full bg-blue-600 transition-all duration-300"
-                style={{ width: `${uploadProgress}%` }}
-              ></div>
-            </div>
-            <p className="text-sm text-gray-600">
-              {uploadProgress}% uploaded
-            </p>
-            
           </div>
-        )}
-          </div>
-          
-     
         </div>
         <Toaster />
       </MaxWidthWrapper>
