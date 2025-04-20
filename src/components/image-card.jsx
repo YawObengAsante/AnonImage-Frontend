@@ -1,7 +1,4 @@
 import { timeAgo } from "@/lib/utils";
-
-
-
 import {
     Card,
     CardContent,
@@ -13,11 +10,11 @@ export default function ImageCard(props) {
   return (
     <Card className="flex basis-[200px]">
         <CardContent>
-            <img src={props.image} alt="vim" />
+            <img src={props.image} alt="vim" className="h-[150px] object-cover w-full rounded-lg" />
             <p>{timeAgo(props.time)}</p>
         </CardContent>
         <CardFooter>
-            <Button onClick={props.delete} variant="destructive">Delete</Button>
+            <Button onClick={props.delete} variant="destructive" className="cursor-pointer">Delete</Button>
         </CardFooter>
     </Card>
   )
