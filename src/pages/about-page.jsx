@@ -1,5 +1,8 @@
-
+import React,{ useEffect } from "react";
 export default function AboutPage() {
+  useEffect(() => {
+    document.title = "About - Anonymous Image";
+  }, []);
   return (
     <div className="min-h-screen bg-white py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
