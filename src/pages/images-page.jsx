@@ -4,13 +4,7 @@ import axiosInstance from "../axiosInstance";
 import { timeAgo } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
-<<<<<<< HEAD
-import { lineSpinner} from 'ldrs'
 
-lineSpinner.register()
-
-=======
->>>>>>> bdf5f776c47fff1d635ace03c3b8dec7e078acb9
 export default function ImagesPage() {
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
