@@ -43,14 +43,9 @@ export default function DashboardPage() {
   };
 
   const handleCopyToClipboard = async () => {
-<<<<<<< HEAD
 
     const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${ids}/${username}`);
-=======
-    const success = await copyLink(
-      `https://anonimage-frontend.onrender.com/send-image/${ids}/`
-    );
->>>>>>> 870ef65691801be2a57930712cbdd78625c44939
+
 
     // Show toast after we know the copy status
     success
