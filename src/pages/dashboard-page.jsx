@@ -8,6 +8,8 @@ import { Toaster } from "@/components/ui/sonner";
 import axiosInstance from "../axiosInstance";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import ImagesPageLoader from "../components/images-page-lodaer";
+
 
 ///
 // this dashboard should show a users link when  logged in or show a login link to users who have not signed in
@@ -17,6 +19,8 @@ export default function DashboardPage() {
   // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
 
   const [ids, setId] = useState("no");
+  const [loading, setLoading] = useState(true);
+  
   let locals = localStorage.getItem("access_token");
   const getId = () => {
     axiosInstance
@@ -27,6 +31,8 @@ export default function DashboardPage() {
       })
       .then((res) => {
         setId(res.data.id);
+        setLoading(false);
+
 
       })
       .catch((e) => {
@@ -50,7 +56,9 @@ export default function DashboardPage() {
       getId();
     }
   }, []);
-
+    if (loading) {
+      return <ImagesPageLoader />;
+    }
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>
