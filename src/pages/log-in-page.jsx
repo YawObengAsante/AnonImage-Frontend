@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 import { ImSpinner2 } from "react-icons/im";
 
@@ -10,8 +10,7 @@ const Login = (props) => {
   });
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,19 +25,18 @@ const Login = (props) => {
     // Handle login logic here
 
     setLoading(true); // start loader
-    
-         axiosInstance.post(`api/token/`,formData)
-         .then((res) =>{
-             localStorage.setItem('access_token',res.data.access);
-             localStorage.setItem('refresh_token',res.data.refresh);
-             axiosInstance.defaults.headers['Authorization'] =
-             'JWT ' + localStorage.getItem('access_token');
-             console.log(res);
-             //props.user(formData.email)
-             //props.token(res.data.access)
-             navigate('/');
-         })
-         //
+
+    axiosInstance.post(`api/token/`, formData).then((res) => {
+      localStorage.setItem("access_token", res.data.access);
+      localStorage.setItem("refresh_token", res.data.refresh);
+      axiosInstance.defaults.headers["Authorization"] =
+        "JWT " + localStorage.getItem("access_token");
+      console.log(res);
+      //props.user(formData.email)
+      //props.token(res.data.access)
+      navigate("/");
+    });
+    //
     //console.log("Login attempt with:", formData);
   };
 useEffect(() => {
@@ -111,7 +109,7 @@ useEffect(() => {
           </div>
 
           <div>
-          {/** 
+            {/** 
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -120,22 +118,23 @@ useEffect(() => {
             </button>
             */}
             <button
-                  type="submit"
-                  disabled={loading}
-                  className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
-                    loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-                  } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
-                >
-                {loading ? (
-                     <>
-                       <ImSpinner2 className="animate-spin" />
-                       Logging in...
-                     </>
-                   ) : (
-                     "Sign in"
-                   )}
+              type="submit"
+              disabled={loading}
+              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
+                loading
+                  ? "bg-blue-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+            >
+              {loading ? (
+                <div className="flex justify-center items-center gap-x-3">
+                  <ImSpinner2 className="animate-spin" />
+                  Logging in...
+                </div>
+              ) : (
+                "Sign in"
+              )}
             </button>
-
           </div>
         </form>
 
