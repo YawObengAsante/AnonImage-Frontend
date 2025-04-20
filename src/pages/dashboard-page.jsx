@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ImagesPageLoader from "../components/images-page-lodaer";
 
-
 ///
 // this dashboard should show a users link when  logged in or show a login link to users who have not signed in
 /// so we will check local storage for access token it it exist it means the user has logged in
@@ -20,7 +19,7 @@ export default function DashboardPage() {
 
   const [ids, setId] = useState("no");
   const [loading, setLoading] = useState(true);
-  
+
   let locals = localStorage.getItem("access_token");
   const getId = () => {
     axiosInstance
@@ -32,8 +31,6 @@ export default function DashboardPage() {
       .then((res) => {
         setId(res.data.id);
         setLoading(false);
-
-
       })
       .catch((e) => {
         console.log("login", e);
@@ -42,8 +39,9 @@ export default function DashboardPage() {
   };
 
   const handleCopyToClipboard = async () => {
-
-    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${ids}/`);
+    const success = await copyLink(
+      `https://anonimage-frontend.onrender.com/send-image/${ids}/`
+    );
 
     // Show toast after we know the copy status
     success
@@ -56,9 +54,9 @@ export default function DashboardPage() {
       getId();
     }
   }, []);
-    if (loading) {
-      return <ImagesPageLoader />;
-    }
+  if (loading) {
+    return <ImagesPageLoader />;
+  }
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>
