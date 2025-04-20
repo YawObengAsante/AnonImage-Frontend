@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 /// so we will check local storage for access token it it exist it means the user has logged in
 
 export default function DashboardPage() {
-  const [link, setLink] = useState(`https://anonimage-frontend.onrender.com/send-image/${parseInt(ids)}/`);
   // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
 
   const [ids, setId] = useState("no");
@@ -28,6 +27,7 @@ export default function DashboardPage() {
       })
       .then((res) => {
         setId(res.data.id);
+
       })
       .catch((e) => {
         console.log("login", e);
@@ -36,7 +36,8 @@ export default function DashboardPage() {
   };
 
   const handleCopyToClipboard = async () => {
-    const success = await copyLink(link);
+
+    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${ids}/`);
 
     // Show toast after we know the copy status
     success
@@ -67,7 +68,7 @@ export default function DashboardPage() {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 bg-white rounded-md px-4 sm:px-6 w-full max-w-2xl mx-auto">
                 <p className="text-gray-700 text-sm sm:text-base truncate w-full text-center sm:text-left">
-                  {link}
+                  {`https://anonimage-frontend.onrender.com/send-image/${ids}/`}
                 </p>
                 <div
                   onClick={handleCopyToClipboard}

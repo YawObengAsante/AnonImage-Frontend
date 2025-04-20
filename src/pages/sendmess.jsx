@@ -22,7 +22,7 @@ const SendImage = () => {
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [uploadProgress, setUploadProgress] = useState(0);
   // const [, setUploadProgressArray] = useState([]);
-  // const [totalUploadProgress, setTotalUploadProgress] = useState(null);
+   const [totalUploadProgress, setTotalUploadProgress] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -41,7 +41,7 @@ const SendImage = () => {
           "Content-Type": "multipart/form-data"
         },
         onUploadProgress: (progressEvent) => {
-         const progress = progressEvent.total ? Math.round((progressEvent.loaded * 100) / uploadProgress.total) : 0
+         const progress = progressEvent.total ? Math.round((progressEvent.loaded * 100) / progressEvent.total) : 0
          setUploadProgress(progress)
         }
       })
@@ -101,7 +101,7 @@ const SendImage = () => {
   const handleChangeEvent = (e) => {
     if (e.target.files) {
       // const filesArray = Array.from(e.target.files);
-      setFile(e.target.file[0]);
+      setFile(e.target.files[0]);
     }
   };
 
@@ -148,33 +148,28 @@ const SendImage = () => {
           </div>   
           
           <div className="flex flex-col items-start">
-          {files &&
-          files.map((file, index) => (
-            <div
-              key={index}
-              className=" bg-white mt-5 p-4 rounded-lg text-gray-700 max-w-[400px]"
-            >
-              <div className=" flex justify-center gap-4">
-              <BsFileEarmarkCheck size={25} />
-              <span className="font-semibold"> {file.name}</span>
+          {file && (
+              <div className="bg-white mt-5 p-4 rounded-lg text-gray-700 max-w-[400px]">
+                <div className="flex justify-center gap-4">
+                  <BsFileEarmarkCheck size={25} />
+                  <span className="font-semibold">{file.name}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            )}
+
 
         {uploadStatus === "uploading" && (
           <div className="space-y-2">
             <div className="w-full h-2.5 bg-gray-200 rounded-full">
               <div
                 className="h-full w-full bg-blue-600 transition-all duration-300"
-                style={{ width: `${totalUploadProgress}%` }}
+                style={{ width: `${uploadProgress}%` }}
               ></div>
             </div>
             <p className="text-sm text-gray-600">
-              {totalUploadProgress}% uploaded
+              {uploadProgress}% uploaded
             </p>
-            <p className="text-sm text-gray-600">
-              {totalUploadProgress}% uploaded
-            </p>
+            
           </div>
         )}
           </div>
