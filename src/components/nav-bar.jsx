@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import MobileNav from "./mobile-nav";
 import { useLocation } from "react-router-dom";
@@ -6,6 +6,7 @@ import { NAV_LINKS, NAV_INACTIVE, NAV_ACTIVE } from "@/lib/constants";
 
 export default function NavBar() {
   const location = useLocation();
+  const navigate = useNavigate()
   // to help access if the user has been logged in
   let user = localStorage.getItem("access_token");
   // to handle the logout functionality
