@@ -59,7 +59,7 @@ export default function LandingPage() {
   return (
     <div className="w-full bg-white/95">
       {/* Hero Section */}
-      <section className="w-full min-h-screen pt-20">
+      <section className="w-full min-h-screen pt-5">
         <MaxWidthWrapper>
           <div className="flex flex-col md:flex-row gap-6">
             <div className="order-2 md:order-1 flex flex-col gap-y-5 md:justify-center">
