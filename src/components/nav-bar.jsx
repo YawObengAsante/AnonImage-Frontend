@@ -7,12 +7,12 @@ import { NAV_LINKS, NAV_INACTIVE, NAV_ACTIVE } from "@/lib/constants";
 export default function NavBar() {
   const location = useLocation();
   // to help access if the user has been logged in
-  let user = localStorage.getItem('access_token')
+  let user = localStorage.getItem("access_token");
   // to handle the logout functionality
-  const handleLogout = ()=>{
-    let user = localStorage.setItem('access_token','')
-        navigate('/')
-    }
+  const handleLogout = () => {
+    let user = localStorage.setItem("access_token", "");
+    navigate("/");
+  };
 
   return (
     <div className="w-full px-5 h-[60px] flex justify-between items-center">
@@ -31,12 +31,9 @@ export default function NavBar() {
                   location.pathname === link.path ? NAV_ACTIVE : NAV_INACTIVE
                 }`}
               >
-              {/* has been commented out 
-
                 <li>
                   <Link to={link.path}>{link.name}</Link>
                 </li>
-                */}
 
                 {/* The block of code checks below to see if the user has logged in. 
                   The images link will not navlink will not show if the user has not logged in.
@@ -44,7 +41,7 @@ export default function NavBar() {
                 
                  */}
 
-                {
+                {/* {
                    link.path=="/image" ?
                    <li>
                     {user ? <Link to={link.path}>{link.name}</Link> : ""}
@@ -53,34 +50,32 @@ export default function NavBar() {
                     <li>
                     <Link to={link.path}>{link.name}</Link>
                   </li>
-                }
+                } */}
 
                 {/* end of the code checking if the user has logged in */}
-
               </span>
             ))}
           </ul>
         </div>
       </div>
       <div className="gap-3 hidden md:flex">
-        {
-          user ?
+        {user ? (
           <Link onClick={handleLogout}>
-          <Button className="cursor-pointer hover:bg-black hover:text-white transition-all ease-in-out duration-500">
-            Log Out
-          </Button>
-        </Link>
-        :
-        <Link to="/log-in">
-          <Button className="cursor-pointer hover:bg-black hover:text-white transition-all ease-in-out duration-500">
-            Log In
-          </Button>
-        </Link>
-        }
+            <Button className="cursor-pointer hover:bg-black hover:text-white transition-all ease-in-out duration-500">
+              Log Out
+            </Button>
+          </Link>
+        ) : (
+          <Link to="/log-in">
+            <Button className="cursor-pointer hover:bg-black hover:text-white transition-all ease-in-out duration-500">
+              Log In
+            </Button>
+          </Link>
+        )}
         <Link to="/dashboard">
-        <Button className="bg-blue-500 text-white font-bold rounded-full cursor-pointer hover:bg-blue-600 transition-all ease-in-out duration-500">
-          Get Started
-        </Button>
+          <Button className="bg-blue-500 text-white font-bold rounded-full cursor-pointer hover:bg-blue-600 transition-all ease-in-out duration-500">
+            Get Started
+          </Button>
         </Link>
       </div>
 
