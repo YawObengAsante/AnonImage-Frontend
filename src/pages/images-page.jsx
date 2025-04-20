@@ -4,7 +4,9 @@ import axiosInstance from "../axiosInstance";
 import { timeAgo } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
+import { lineSpinner} from 'ldrs'
 
+lineSpinner.register()
 
 export default function ImagesPage() {
 
@@ -71,6 +73,8 @@ useEffect(()=>{
                     )
       })
       }
+
+      <l-linespinner/>
       
     </div>
   )
