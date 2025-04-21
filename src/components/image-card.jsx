@@ -10,7 +10,10 @@ export default function ImageCard(props) {
   return (
     <Card className="flex basis-[200px]">
         <CardContent>
-            <img src={props.image} alt="vim" className="h-[150px] object-cover w-full rounded-lg" />
+          <a href={props.image} target="_blank" rel="noopener noreferrer">
+          <img src={props.image} alt="vim"  className="h-[150px] object-cover w-full rounded-lg" />
+
+          </a>
             <p>{timeAgo(props.time)}</p>
         </CardContent>
         <CardFooter>
