@@ -11,8 +11,8 @@ export default function NavBar() {
   let user = localStorage.getItem("access_token");
   // to handle the logout functionality
   const handleLogout = () => {
-    let user = localStorage.setItem("access_token", "");
-    navigate("/");
+    localStorage.clear();
+  window.location.href = "/log-in"; 
   };
 
   return (

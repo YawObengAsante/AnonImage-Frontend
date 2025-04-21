@@ -1,6 +1,8 @@
+
+
 import Heading from "@/components/heading";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { useState, useLayoutEffect,useEffect } from "react";
+import { useState,useEffect,useMemo } from "react";
 import { copyLink } from "@/lib/utils";
 import CopyLinkButton from "@/components/copy-link-button";
 import { toast } from "sonner";
@@ -17,34 +19,18 @@ import ImagesPageLoader from "../components/images-page-lodaer";
 export default function DashboardPage() {
   // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
 
-  const [ids, setId] = useState("no");
-  const [username, setUsername] = useState("no");
+  //const [loading, setLoading] = useState(true);
 
-  const [loading, setLoading] = useState(true);
+  //let locals = localStorage.getItem("access_token");
+  const locals =  localStorage.getItem("access_token");
+  const user_data =  localStorage.getItem("user_data");
 
-  let locals = localStorage.getItem("access_token");
-  const getId = () => {
-    axiosInstance
-      .get(`api/imaging/dashboard/`, {
-        headers: {
-          Authorization: "JWT " + localStorage.getItem("access_token"),
-        },
-      })
-      .then((res) => {
-        console.log(res.data)
-        setId(res.data.id);
-        setUsername(res.data.name);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log("login", e);
-        console.log("something is wrong");
-      });
-  };
+
+  
 
   const handleCopyToClipboard = async () => {
 
-    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${ids}/${username}`);
+    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${user_data.id}/${user_data.name}`);
 
 
     // Show toast after we know the copy status
@@ -53,18 +39,13 @@ export default function DashboardPage() {
       : toast("Copying link failed. Try again later");
   };
 
-  useLayoutEffect(() => {
-    if (locals) {
-      getId();
-    }
-  }, []);
 
   useEffect(() => {
       document.title = "Dashboard - Anonymous Image";
     }, []);
-    if (loading) {
-      return <ImagesPageLoader />;
-    }
+    //if (loading) {
+    //  return <ImagesPageLoader />;
+    //}
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>
@@ -72,7 +53,7 @@ export default function DashboardPage() {
           Welcome to Anonymous Image Sharing
         </Heading>
 
-        {ids !== "no" ? (
+        {locals ? (
           <>
             <div className="mt-4 sm:mt-6 md:mt-8 p-6 sm:p-10 md:p-12 lg:p-16 xl:p-20 bg-blue-100 rounded-lg text-center mx-4 sm:mx-0">
               <p className="text-base sm:text-lg md:text-xl font-semibold text-blue-700 mb-4 sm:mb-6">
@@ -82,7 +63,7 @@ export default function DashboardPage() {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 bg-white rounded-md px-4 sm:px-6 w-full max-w-2xl mx-auto">
                 <p className="text-gray-700 text-sm sm:text-base truncate w-full text-center sm:text-left">
-                  {`https://anonimage-frontend.onrender.com/send-image/${ids}/${username}`}
+                  {`https://anonimage-frontend.onrender.com/send-image/${user_data.id}/${user_data.name}`}
                 </p>
                 <div
                   onClick={handleCopyToClipboard}
@@ -116,3 +97,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

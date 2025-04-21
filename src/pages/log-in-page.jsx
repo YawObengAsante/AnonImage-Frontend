@@ -29,8 +29,8 @@ const Login = (props) => {
     axiosInstance.post(`api/token/`, formData).then((res) => {
       localStorage.setItem("access_token", res.data.access);
       localStorage.setItem("refresh_token", res.data.refresh);
-      axiosInstance.defaults.headers["Authorization"] =
-        "JWT " + localStorage.getItem("access_token");
+      //axiosInstance.defaults.headers["Authorization"] =
+       // "JWT " + localStorage.getItem("access_token");
       console.log(res);
       //props.user(formData.email)
       //props.token(res.data.access)

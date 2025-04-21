@@ -15,6 +15,8 @@ import {
   FaUserSecret,
 } from "react-icons/fa";
 import { MdOutlinePrivacyTip, MdOutlinePhotoLibrary } from "react-icons/md";
+import { useEffect } from "react";
+import axiosInstance from "../axiosInstance";
 
 // Data
 const features = [
@@ -56,6 +58,33 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const getId = () => {
+  const user_status = localStorage.getItem("access_token")
+
+    if(user_status){
+      axiosInstance
+      .get(`api/imaging/dashboard/`, {
+        headers: {
+          Authorization: "JWT " + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+      localStorage.setItem("user_data", res.data);
+
+        console.log(res.data)
+        
+      })
+      .catch((e) => {
+        console.log("login", e);
+        console.log("something is wrong");
+      });
+    }
+    return;
+  };
+
+  useEffect(()=>{
+    getId()
+  },[])
   return (
     <div className="w-full bg-white/95">
       {/* Hero Section */}
