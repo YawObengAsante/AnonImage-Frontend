@@ -9,7 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 const SendImage = () => {
   // contains the user id
-  const { userid,username } = useParams();
+  const { userid, username } = useParams();
 
   // we will navigate to the landing page right after the image has been sent
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ const SendImage = () => {
       setFile(e.target.files[0]);
     }
   };
-useEffect(() => {
+  useEffect(() => {
     document.title = "Send Image - Anonymous Image";
   }, []);
   return (
@@ -113,7 +113,8 @@ useEffect(() => {
 
         <div className="mt-4 sm:mt-6 md:mt-8 p-6 sm:p-10 md:p-12 lg:p-16 xl:p-20 bg-blue-100 rounded-lg text-center mx-4 sm:mx-0">
           <p className="text-base sm:text-lg md:text-xl font-semibold text-blue-700 mb-4 sm:mb-6">
-            Send image anonymously to <b>{username.toUpperCase()}</b> without leaving any trace
+            Send image anonymously to <b>{username.toUpperCase()}</b> without
+            leaving any trace
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 px-4 sm:px-6 w-full max-w-2xl mx-auto">

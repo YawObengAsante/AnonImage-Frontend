@@ -1,8 +1,6 @@
-
-
 import Heading from "@/components/heading";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { useState,useEffect,useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { copyLink } from "@/lib/utils";
 import CopyLinkButton from "@/components/copy-link-button";
 import { toast } from "sonner";
@@ -22,20 +20,17 @@ export default function DashboardPage() {
   //const [loading, setLoading] = useState(true);
 
   //let locals = localStorage.getItem("access_token");
-  const locals =  localStorage.getItem("access_token");
-  const user_id =  localStorage.getItem("user_id");
-  const user_name =  localStorage.getItem("user_name");
+  const locals = localStorage.getItem("access_token");
+  const user_id = localStorage.getItem("user_id");
+  const user_name = localStorage.getItem("user_name");
 
-
-
-  console.log(user_name)
-  console.log(user_id)
-
+  console.log(user_name);
+  console.log(user_id);
 
   const handleCopyToClipboard = async () => {
-
-    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`);
-
+    const success = await copyLink(
+      `https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`
+    );
 
     // Show toast after we know the copy status
     success
@@ -43,13 +38,12 @@ export default function DashboardPage() {
       : toast("Copying link failed. Try again later");
   };
 
-
   useEffect(() => {
-      document.title = "Dashboard - Anonymous Image";
-    }, []);
-    //if (loading) {
-    //  return <ImagesPageLoader />;
-    //}
+    document.title = "Dashboard - Anonymous Image";
+  }, []);
+  //if (loading) {
+  //  return <ImagesPageLoader />;
+  //}
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>
@@ -101,4 +95,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-

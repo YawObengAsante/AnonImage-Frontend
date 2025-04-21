@@ -6,66 +6,59 @@ import MaxWidthWrapper from "../components/max-width-wrapper";
 import ImagesPageLoader from "../components/images-page-lodaer";
 import NoContentAvailable from "../components/no-content-available";
 
-
 export default function ImagesPage() {
-
-  const [post, setPost] = useState([])
+  const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate()
-  const user = localStorage.getItem('access_token')
-
+  const navigate = useNavigate();
+  const user = localStorage.getItem("access_token");
 
   const deleteImage = (id) => {
     setPost((prevPost) => prevPost.filter((pos) => pos.id !== id));
     delPost(id);
-};
+  };
 
-const getPost = ()=>{
-    axiosInstance.get(`api/imaging/view-image/`,{
-        headers:{
-    Authorization: 'JWT ' + localStorage.getItem('access_token')
-
-},
-    }
-    )
-    .then((res) =>{
-        console.log("successful")
-        console.log(res.data)
-        setPost(res.data)
+  const getPost = () => {
+    axiosInstance
+      .get(`api/imaging/view-image/`, {
+        headers: {
+          Authorization: "JWT " + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        console.log("successful");
+        console.log(res.data);
+        setPost(res.data);
         setLoading(false);
       })
       .catch((e) => {
         console.log("login", e);
         setLoading(false);
         //navigate('/login')
-    })
+      });
+  };
 
-}
-
-const delPost = (id)=>{
-    axiosInstance.get(`api/imaging/delete-image/${id}`,{
-        headers:{
-    Authorization: 'JWT ' + localStorage.getItem('access_token')
-
-},
-    }
-    )
-    .then((res) =>{
-        console.log("deleted successfully")
-        
-    })
-    .catch(e=>{
-        console.log('login',e)
+  const delPost = (id) => {
+    axiosInstance
+      .get(`api/imaging/delete-image/${id}`, {
+        headers: {
+          Authorization: "JWT " + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        console.log("deleted successfully");
+      })
+      .catch((e) => {
+        console.log("login", e);
         //navigate('/login')
-    })
-}
+      });
+  };
 
-useEffect(()=>{
+  useEffect(() => {
     getPost();
-}, [])
+  }, []);
 
-useEffect(() => {
+  useEffect(() => {
     document.title = "Images - Anonymous Image";
   }, []);
   if (loading) {
@@ -74,7 +67,7 @@ useEffect(() => {
 
   return (
     <MaxWidthWrapper>
-      {(post.length === 0 && user) ? (
+      {post.length === 0 && user ? (
         <NoContentAvailable
           title="No images to display"
           description="You currently do not have any anonymous images. Send the link on your dashboard to friends to get some pictures to view. :)"
@@ -95,12 +88,14 @@ useEffect(() => {
           })}
         </div>
       )}
-      {!user && <NoContentAvailable 
-        title="Ooops! Seems like you are not logged in :("
-        description="Log in or Sing up to view images!"
-        actionText="Log In"
-        onAction={() => navigate("/log-in")}
-      />}
+      {!user && (
+        <NoContentAvailable
+          title="Ooops! Seems like you are not logged in :("
+          description="Log in or Sing up to view images!"
+          actionText="Log In"
+          onAction={() => navigate("/log-in")}
+        />
+      )}
     </MaxWidthWrapper>
   );
 }
