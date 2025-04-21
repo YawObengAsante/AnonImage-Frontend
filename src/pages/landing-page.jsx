@@ -69,7 +69,9 @@ export default function LandingPage() {
         },
       })
       .then((res) => {
-      localStorage.setItem("user_data", res.data);
+      localStorage.setItem("user_name", res.data.name);
+      localStorage.setItem("user_id", res.data.id);
+
 
         console.log(res.data)
         

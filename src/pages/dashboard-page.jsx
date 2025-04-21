@@ -23,14 +23,18 @@ export default function DashboardPage() {
 
   //let locals = localStorage.getItem("access_token");
   const locals =  localStorage.getItem("access_token");
-  const user_data =  localStorage.getItem("user_data");
+  const user_id =  localStorage.getItem("user_id");
+  const user_name =  localStorage.getItem("user_name");
 
 
-  
+
+  console.log(user_name)
+  console.log(user_id)
+
 
   const handleCopyToClipboard = async () => {
 
-    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${user_data.id}/${user_data.name}`);
+    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`);
 
 
     // Show toast after we know the copy status
@@ -63,7 +67,7 @@ export default function DashboardPage() {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 bg-white rounded-md px-4 sm:px-6 w-full max-w-2xl mx-auto">
                 <p className="text-gray-700 text-sm sm:text-base truncate w-full text-center sm:text-left">
-                  {`https://anonimage-frontend.onrender.com/send-image/${user_data.id}/${user_data.name}`}
+                  {`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`}
                 </p>
                 <div
                   onClick={handleCopyToClipboard}
