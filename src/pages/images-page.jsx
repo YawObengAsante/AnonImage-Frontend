@@ -3,7 +3,7 @@ import ImageCard from "../components/image-card";
 import axiosInstance from "../axiosInstance";
 import { useNavigate } from "react-router-dom";
 import MaxWidthWrapper from "../components/max-width-wrapper";
-import ImagesPageLoader from "../components/images-page-lodaer";
+import ImagesPageLoader from "../components/images-page-loader";
 import NoContentAvailable from "../components/no-content-available";
 
 export default function ImagesPage() {
