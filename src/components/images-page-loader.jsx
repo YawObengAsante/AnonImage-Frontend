@@ -11,6 +11,7 @@ export default function ImagesPageLoader() {
                 <SkeletonCard/>
                 <SkeletonCard/>
                 <SkeletonCard/>
+                <SkeletonCard/>
             </div>
         </MaxWidthWrapper>
     </div>
