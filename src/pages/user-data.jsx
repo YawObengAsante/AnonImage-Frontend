@@ -9,16 +9,42 @@ export function getUser() {
   }
 
   
-  export async function refreshUser() {
-    try {
-      const res = await axiosInstance.get(`/api/user-info`);
-      localStorage.setItem("userInfo", JSON.stringify(res.data));
-      return res.data;
-    } catch (err) {
-      console.error("Could not refresh user", err);
-      return null;
-    }
+import axiosInstance from "../axiosInstance";
+
+/**
+ * Refreshes user data from the backend and updates localStorage.
+ * Returns user data or null on failure.
+ */
+export const refreshUser = async () => {
+  const token = localStorage.getItem("access_token");
+  const user_id = localStorage.getItem("user_id");
+
+  
+  if (!token) {
+    console.warn("No token found in localStorage");
+    return;
   }
+if(!user_id){
+  try {
+    const res = await axiosInstance.get("api/imaging/dashboard/", {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+
+    const { id, name } = res.data;
+    localStorage.setItem("user_id", id);
+    localStorage.setItem("user_name", name);
+
+   // console.log("User refreshed:", res.data);
+
+    //return { id, name };
+  } catch (error) {
+    console.error("Error refreshing user:", error);
+    return null;
+  }
+}
+};
 
 
   {/** the code below is how to use getUser on any page */}

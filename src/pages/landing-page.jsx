@@ -58,9 +58,9 @@ const features = [
 ];
 
 export default function LandingPage() {
-  const getId = () => {
-  const user_status = localStorage.getItem("access_token")
 
+  const getId = () => {
+    const user_status = localStorage.getItem("access_token")
     if(user_status){
       axiosInstance
       .get(`api/imaging/dashboard/`, {
