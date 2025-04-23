@@ -43,6 +43,7 @@ const features = [
     title: "Gallery Access",
     description:
       "View all your shared images in one convenient, private gallery.",
+      link: "/image",
   },
   {
     icon: <FaRocket />,
