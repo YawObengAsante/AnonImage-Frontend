@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
-
 import { CgMenuRightAlt } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { NAV_LINKS, NAV_INACTIVE, NAV_ACTIVE } from "@/lib/constants";
-
-
 import {
   Sheet,
   SheetContent,
