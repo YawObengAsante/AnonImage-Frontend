@@ -58,35 +58,40 @@ const features = [
 ];
 
 export default function LandingPage() {
+<<<<<<< HEAD
 
   const getId = () => {
     const user_status = localStorage.getItem("access_token")
     if(user_status){
+=======
+  const getId = () => {
+    const user_status = localStorage.getItem("access_token");
+
+    if (user_status) {
+>>>>>>> c09d59ad447f64722e1f225da96f024a423bd63e
       axiosInstance
-      .get(`api/imaging/dashboard/`, {
-        headers: {
-          Authorization: "JWT " + localStorage.getItem("access_token"),
-        },
-      })
-      .then((res) => {
-      localStorage.setItem("user_name", res.data.name);
-      localStorage.setItem("user_id", res.data.id);
+        .get(`api/imaging/dashboard/`, {
+          headers: {
+            Authorization: "JWT " + localStorage.getItem("access_token"),
+          },
+        })
+        .then((res) => {
+          localStorage.setItem("user_name", res.data.name);
+          localStorage.setItem("user_id", res.data.id);
 
-
-        console.log(res.data)
-        
-      })
-      .catch((e) => {
-        console.log("login", e);
-        console.log("something is wrong");
-      });
+          console.log(res.data);
+        })
+        .catch((e) => {
+          console.log("login", e);
+          console.log("something is wrong");
+        });
     }
     return;
   };
 
-  useEffect(()=>{
-    getId()
-  },[])
+  useEffect(() => {
+    getId();
+  }, []);
   return (
     <div className="w-full bg-white/95">
       {/* Hero Section */}

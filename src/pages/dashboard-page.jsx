@@ -1,8 +1,6 @@
-
-
 import Heading from "@/components/heading";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { useState,useEffect,useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { copyLink } from "@/lib/utils";
 import CopyLinkButton from "@/components/copy-link-button";
 import { toast } from "sonner";
@@ -10,32 +8,30 @@ import { Toaster } from "@/components/ui/sonner";
 import axiosInstance from "../axiosInstance";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import ImagesPageLoader from "../components/images-page-lodaer";
+// import ImagesPageLoader from "../components/images-page-loader";
 
 ///
 // this dashboard should show a users link when  logged in or show a login link to users who have not signed in
 /// so we will check local storage for access token it it exist it means the user has logged in
+const locals = localStorage.getItem("access_token");
+const user_id = localStorage.getItem("user_id");
+const user_name = localStorage.getItem("user_name");
 
 export default function DashboardPage() {
   // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
 
   //const [loading, setLoading] = useState(true);
+  const [link, setLink] = useState(
+    `https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`
+  );
 
   //let locals = localStorage.getItem("access_token");
-  const locals =  localStorage.getItem("access_token");
-  const user_id =  localStorage.getItem("user_id");
-  const user_name =  localStorage.getItem("user_name");
 
-
-
-  console.log(user_name)
-  console.log(user_id)
-
+  // console.log(user_name);
+  // console.log(user_id);
 
   const handleCopyToClipboard = async () => {
-
-    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`);
-
+    const success = await copyLink(link);
 
     // Show toast after we know the copy status
     success
@@ -43,13 +39,12 @@ export default function DashboardPage() {
       : toast("Copying link failed. Try again later");
   };
 
-
   useEffect(() => {
-      document.title = "Dashboard - Anonymous Image";
-    }, []);
-    //if (loading) {
-    //  return <ImagesPageLoader />;
-    //}
+    document.title = "Dashboard - Anonymous Image";
+  }, []);
+  //if (loading) {
+  //  return <ImagesPageLoader />;
+  //}
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>
@@ -67,7 +62,7 @@ export default function DashboardPage() {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 bg-white rounded-md px-4 sm:px-6 w-full max-w-2xl mx-auto">
                 <p className="text-gray-700 text-sm sm:text-base truncate w-full text-center sm:text-left">
-                  {`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`}
+                  {link}
                 </p>
                 <div
                   onClick={handleCopyToClipboard}
@@ -101,4 +96,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
