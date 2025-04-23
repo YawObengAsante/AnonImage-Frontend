@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -117,8 +118,14 @@
   body {
     @apply bg-background text-foreground box-border;
   }
-
 }
 .gradient-text {
-  @apply bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text h-20
+  @apply bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text h-20;
+}
+
+.playwrite-cu-logo {
+  font-family: "Playwrite CU", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }

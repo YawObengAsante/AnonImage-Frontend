@@ -6,20 +6,20 @@ import { NAV_LINKS, NAV_INACTIVE, NAV_ACTIVE } from "@/lib/constants";
 
 export default function NavBar() {
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // to help access if the user has been logged in
   let user = localStorage.getItem("access_token");
   // to handle the logout functionality
   const handleLogout = () => {
     localStorage.clear();
-  window.location.href = "/log-in"; 
+    window.location.href = "/log-in";
   };
 
   return (
     <div className="w-full px-5 h-[60px] flex justify-between items-center">
       <div className="flex items-center justify-between w-xl gap-x-7">
         <Link to="/">
-          <h1 className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text cursor-pointer">
+          <h1 className="playwrite-cu-logo font-bold text-2xl bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text cursor-pointer">
             AnonImage
           </h1>
         </Link>
@@ -35,25 +35,6 @@ export default function NavBar() {
                 <li>
                   <Link to={link.path}>{link.name}</Link>
                 </li>
-
-                {/* The block of code checks below to see if the user has logged in. 
-                  The images link will not navlink will not show if the user has not logged in.
-                  so we are getting the access token and it is being stored in user. so if user variable is true then it means the current user has logged in
-                
-                 */}
-
-                {/* {
-                   link.path=="/image" ?
-                   <li>
-                    {user ? <Link to={link.path}>{link.name}</Link> : ""}
-                  </li> 
-                    :
-                    <li>
-                    <Link to={link.path}>{link.name}</Link>
-                  </li>
-                } */}
-
-                {/* end of the code checking if the user has logged in */}
               </span>
             ))}
           </ul>
