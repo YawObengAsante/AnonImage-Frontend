@@ -18,17 +18,10 @@ const user_id = localStorage.getItem("user_id");
 const user_name = localStorage.getItem("user_name");
 
 export default function DashboardPage() {
-  // <p className="">{`https://anonymous-image-react.onrender.com/send-image/${parseInt(ids)}/`}</p>
-
-  //const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState(user_name);
   const [link, setLink] = useState(
     `https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`
   );
-
-  //let locals = localStorage.getItem("access_token");
-
-  // console.log(user_name);
-  // console.log(user_id);
 
   const handleCopyToClipboard = async () => {
     const success = await copyLink(link);
@@ -42,9 +35,6 @@ export default function DashboardPage() {
   useEffect(() => {
     document.title = "Dashboard - Anonymous Image";
   }, []);
-  //if (loading) {
-  //  return <ImagesPageLoader />;
-  //}
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>
@@ -55,6 +45,9 @@ export default function DashboardPage() {
         {locals ? (
           <>
             <div className="mt-4 sm:mt-6 md:mt-8 p-6 sm:p-10 md:p-12 lg:p-16 xl:p-20 bg-blue-100 rounded-lg text-center mx-4 sm:mx-0">
+              <p className="font-bold text-base sm:text-lg md:text-xl text-blue-700 mb-4 sm:mb-6">
+                Welcome, {userName}!
+              </p>
               <p className="text-base sm:text-lg md:text-xl font-semibold text-blue-700 mb-4 sm:mb-6">
                 Copy and share the link below to friends to receive images
                 anonymously

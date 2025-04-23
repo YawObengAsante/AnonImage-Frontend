@@ -61,6 +61,7 @@ export default function ImagesPage() {
   useEffect(() => {
     document.title = "Images - Anonymous Image";
   }, []);
+  
   if (loading) {
     return <ImagesPageLoader />;
   }
