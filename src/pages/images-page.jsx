@@ -50,7 +50,7 @@ export default function ImagesPage() {
       })
       .catch((e) => {
         console.log("login", e);
-        //navigate('/login')
+        navigate('/login')
       });
   };
 
