@@ -26,16 +26,30 @@ export const refreshUser = async () => {
   }
 if(!user_id){
   try {
-    const res = await axiosInstance.get("api/imaging/dashboard/", {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    });
+    axiosInstance
+        .get(`api/imaging/dashboard/`, {
+          headers: {
+            Authorization: "JWT " + localStorage.getItem("access_token"),
+          },
+        })
+        .then((res) => {
+          localStorage.setItem("user_name", res.data.name);
+          localStorage.setItem("user_id", res.data.id);
 
-    const { id, name } = res.data;
-    localStorage.setItem("user_id", id);
-    localStorage.setItem("user_name", name);
-    console.log("we got it for you")
+          console.log(res.data);
+        })
+    //const res = await axiosInstance.get("api/imaging/dashboard/", {
+    //  headers: {
+    //    Authorization: `JWT ${token}`,
+    //  },
+    //});
+//
+    //const { id, name } = res.data;
+    //localStorage.setItem("user_id", id);
+    //localStorage.setItem("user_name", name);
+    //console.log("we got it for you")
+    //setId(localStorage.getItem("user_id"))
+    //setUsername(localStorage.getItem("user_name"))
 
    // console.log("User refreshed:", res.data);
 

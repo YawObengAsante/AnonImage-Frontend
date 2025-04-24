@@ -14,22 +14,25 @@ import { refreshUser } from "./user-data"
 ///
 // this dashboard should show a users link when  logged in or show a login link to users who have not signed in
 /// so we will check local storage for access token it it exist it means the user has logged in
-const locals = localStorage.getItem("access_token");
-const user_id = localStorage.getItem("user_id");
-const user_name = localStorage.getItem("user_name");
+//const locals = localStorage.getItem("access_token");
+//const user_id = localStorage.getItem("user_id");
+//const user_name = localStorage.getItem("user_name");
 
 export default function DashboardPage() {
 
 const locals = localStorage.getItem("access_token");
 const user_id = localStorage.getItem("user_id");
 const user_name = localStorage.getItem("user_name");
+  const [id, setId] = useState(user_id)
+  const [name, setUsername] = useState(user_name)
   
+
   console.log(user_name)
   console.log(user_id)
 
   const handleCopyToClipboard = async () => {
     
-    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`);
+    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${id}/${name}`);
 
 
     // Show toast after we know the copy status
@@ -39,9 +42,25 @@ const user_name = localStorage.getItem("user_name");
   };
 
   useEffect(() => {
-    refreshUser();
+    //refreshUser();
+    if(!id){
+      axiosInstance
+        .get(`api/imaging/dashboard/`, {
+          headers: {
+            Authorization: "JWT " + localStorage.getItem("access_token"),
+          },
+        })
+        .then((res) => {
+          localStorage.setItem("user_name", res.data.name);
+          localStorage.setItem("user_id", res.data.id);
+
+          console.log("yes we got it from here");
+          setId(localStorage.getItem("user_id"))
+          setUsername(localStorage.getItem("user_name"))
+        })
+    }
     document.title = "Dashboard - Anonymous Image";
-  }, []);
+  }, [user_id]);
   return (
     <div className="min-h-screen">
       <MaxWidthWrapper>
@@ -53,7 +72,7 @@ const user_name = localStorage.getItem("user_name");
           <>
             <div className="mt-4 sm:mt-6 md:mt-8 p-6 sm:p-10 md:p-12 lg:p-16 xl:p-20 bg-blue-100 rounded-lg text-center mx-4 sm:mx-0">
               <p className="font-bold text-base sm:text-lg md:text-xl text-blue-700 mb-4 sm:mb-6">
-                Welcome, {user_name}!
+                Welcome, {name}!
               </p>
               <p className="text-base sm:text-lg md:text-xl font-semibold text-blue-700 mb-4 sm:mb-6">
                 Copy and share the link below to friends to receive images
@@ -62,7 +81,7 @@ const user_name = localStorage.getItem("user_name");
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 bg-white rounded-md px-4 sm:px-6 w-full max-w-2xl mx-auto">
                 <p className="text-gray-700 text-sm sm:text-base truncate w-full text-center sm:text-left">
-                  {`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`}
+                  {`https://anonimage-frontend.onrender.com/send-image/${id}/${name}`}
                 </p>
                 <div
                   onClick={handleCopyToClipboard}
