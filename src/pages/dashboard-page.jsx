@@ -25,10 +25,6 @@ const user_id = localStorage.getItem("user_id");
 const user_name = localStorage.getItem("user_name");
   const [id, setId] = useState(user_id)
   const [name, setUsername] = useState(user_name)
-  
-
-  console.log(user_name)
-  console.log(user_id)
 
   const handleCopyToClipboard = async () => {
     
@@ -43,7 +39,7 @@ const user_name = localStorage.getItem("user_name");
 
   useEffect(() => {
     //refreshUser();
-    if(!id){
+    if(!id && !locals){
       axiosInstance
         .get(`api/imaging/dashboard/`, {
           headers: {

@@ -4,7 +4,7 @@ import { FeatureCard } from "../components/feature-card";
 import { StepItem } from "../components/step-item";
 import { Footer } from "../components/footer";
 import { STEPS } from "@/lib/constants";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CgArrowRight } from "react-icons/cg";
 import illustrationImg from "@/assets/undraw_photographer_2rbr.svg";
@@ -59,7 +59,7 @@ const features = [
 ];
 
 export default function LandingPage() {
-
+    const navigate = useNavigate()
   const getId = () => {
     const user_status = localStorage.getItem("access_token");
 
@@ -75,6 +75,7 @@ export default function LandingPage() {
           localStorage.setItem("user_id", res.data.id);
 
           console.log(res.data);
+          navigate('/dashboard')
         })
         .catch((e) => {
           console.log("login", e);
