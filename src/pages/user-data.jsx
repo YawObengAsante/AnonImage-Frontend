@@ -35,6 +35,7 @@ if(!user_id){
     const { id, name } = res.data;
     localStorage.setItem("user_id", id);
     localStorage.setItem("user_name", name);
+    console.log("we got it for you")
 
    // console.log("User refreshed:", res.data);
 

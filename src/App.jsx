@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+// google anlytics function
 
 // Layout
 import RootLayout from "./layouts/root-layout";

@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import axiosInstance from "../axiosInstance";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { refreshUser } from "./user-data"
 // import ImagesPageLoader from "../components/images-page-loader";
 
 ///
@@ -18,13 +19,18 @@ const user_id = localStorage.getItem("user_id");
 const user_name = localStorage.getItem("user_name");
 
 export default function DashboardPage() {
-  const [userName, setUserName] = useState(user_name);
-  const [link, setLink] = useState(
-    `https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`
-  );
+
+const locals = localStorage.getItem("access_token");
+const user_id = localStorage.getItem("user_id");
+const user_name = localStorage.getItem("user_name");
+  
+  console.log(user_name)
+  console.log(user_id)
 
   const handleCopyToClipboard = async () => {
-    const success = await copyLink(link);
+    
+    const success = await copyLink(`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`);
+
 
     // Show toast after we know the copy status
     success
@@ -33,6 +39,7 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
+    refreshUser();
     document.title = "Dashboard - Anonymous Image";
   }, []);
   return (
@@ -46,7 +53,7 @@ export default function DashboardPage() {
           <>
             <div className="mt-4 sm:mt-6 md:mt-8 p-6 sm:p-10 md:p-12 lg:p-16 xl:p-20 bg-blue-100 rounded-lg text-center mx-4 sm:mx-0">
               <p className="font-bold text-base sm:text-lg md:text-xl text-blue-700 mb-4 sm:mb-6">
-                Welcome, {userName}!
+                Welcome, {user_name}!
               </p>
               <p className="text-base sm:text-lg md:text-xl font-semibold text-blue-700 mb-4 sm:mb-6">
                 Copy and share the link below to friends to receive images
@@ -55,7 +62,7 @@ export default function DashboardPage() {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 py-3 sm:py-4 bg-white rounded-md px-4 sm:px-6 w-full max-w-2xl mx-auto">
                 <p className="text-gray-700 text-sm sm:text-base truncate w-full text-center sm:text-left">
-                  {link}
+                  {`https://anonimage-frontend.onrender.com/send-image/${user_id}/${user_name}`}
                 </p>
                 <div
                   onClick={handleCopyToClipboard}
