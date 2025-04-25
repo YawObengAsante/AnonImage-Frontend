@@ -62,8 +62,10 @@ export default function LandingPage() {
     const navigate = useNavigate()
   const getId = () => {
     const user_status = localStorage.getItem("access_token");
+    const user_id = localStorage.getItem("user_id");
 
-    if (user_status) {
+
+    if (user_status && !user_id) {
       axiosInstance
         .get(`api/imaging/dashboard/`, {
           headers: {
